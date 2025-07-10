@@ -11,11 +11,8 @@ class Solution {
         }
         String ans = "";
         while(st.size() != 0){
-            ans += st.pop();
+            ans = st.pop() + ans;
         }
-        StringBuilder sb = new StringBuilder(ans);
-        sb.reverse();
-        return sb.toString();
-        
+        return ans;
     }
 }
