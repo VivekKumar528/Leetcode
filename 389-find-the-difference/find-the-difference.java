@@ -1,25 +1,15 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        for(int x=0;x<s.length();x++){
-            char key = s.charAt(x);
-            if(map.containsKey(key)){
-                int freq = map.get(key);
-                map.put(key, freq+1);
-            } else map.put(key, 1);
+        int sumS = 0;
+        int sumT = 0;
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            sumS += (int)ch;
         }
-        for(int x=0;x<t.length();x++){
-            char key = t.charAt(x);
-            if(map.containsKey(key)){
-                int freq = map.get(key);
-                map.put(key, freq-1);
-            } else map.put(key, -1);
+        for(int i=0;i<t.length();i++){
+            char ch = t.charAt(i);
+            sumT += (int)ch;
         }
-        char ans = '#';
-        for(char key : map.keySet()){
-            if(map.get(key) == -1) ans = key;
-        }
-        return ans;
-
+        return (char)Math.abs(sumS - sumT);
     }
 }
