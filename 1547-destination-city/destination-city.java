@@ -1,20 +1,12 @@
 class Solution {
-    public String destCity(List<List<String>> list) {
-        HashMap<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            String key = list.get(i).get(0);
-            if (map.containsKey(key)) {
-                int freq = map.get(key);
-                map.put(key, freq + 1);
-            } else
-                map.put(key, 1);
+    public String destCity(List<List<String>> paths) {
+        HashSet<String> set = new HashSet<>();
+        for(int i=0;i<paths.size();i++){
+            set.add(paths.get(i).get(0));
         }
-        for (int i = 0; i < list.size(); i++) {
-            String key = list.get(i).get(1);
-            if (!map.containsKey(key) || map.get(key) == 0)
-                return key;
+        for(int i=0;i<paths.size();i++){
+            if(!set.contains(paths.get(i).get(1))) return paths.get(i).get(1);
         }
         return "";
-
     }
 }
