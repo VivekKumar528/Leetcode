@@ -1,27 +1,22 @@
 class Solution {
-    public boolean checkRow(int row, int[][] arr){
-        int count = 0;
-        for(int j=0;j<arr[0].length;j++){
-            if(arr[row][j] == 1) count++;
-        }
-        return count == 1;
-    }
-    public boolean checkCol(int col, int[][] arr){
-        int count = 0;
-        for(int i=0;i<arr.length;i++){
-            if(arr[i][col] == 1) count++;
-        }
-        return count == 1;
-    }
-    public int numSpecial(int[][] arr) {
+    public int numSpecial(int[][] mat) {
+        int[] row = new int[mat.length];
+        int[] col = new int[mat[0].length];
         int ans = 0;
-        for(int i=0;i<arr.length;i++){
-            for(int j=0;j<arr[0].length;j++){
-                if(arr[i][j] == 1){
-                    if(checkRow(i, arr) && checkCol(j, arr)) ans = ans + 1;
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j] == 1){
+                    row[i] += 1;
+                    col[j] += 1;
                 }
             }
         }
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j] == 1 && row[i] == 1 && col[j] == 1) ans++;
+            }
+        }
         return ans;
+        
     }
 }
