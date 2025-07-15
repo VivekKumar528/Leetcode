@@ -1,6 +1,5 @@
 class Solution {
     public int maxProductDifference(int[] arr) {
-        // 2 big - 2 small
         int firstMax = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
         int firstSmall = Integer.MAX_VALUE;
