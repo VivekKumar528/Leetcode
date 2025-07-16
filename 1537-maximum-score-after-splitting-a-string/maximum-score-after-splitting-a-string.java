@@ -19,9 +19,9 @@ class Solution {
         int zero = 0;
         int ones = 0;
         int max = 0;
-        for(int i=1;i<str.length();i++){
-            zero = countZero(0, i-1, str);
-            ones = countOnes(i, str.length()-1, str);
+        for(int i=0;i<=str.length()-2;i++){
+            zero = countZero(0, i, str);
+            ones = countOnes(i+1, str.length()-1, str);
             max = Math.max(max, zero + ones);
         }
         return max;
