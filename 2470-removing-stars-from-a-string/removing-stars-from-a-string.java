@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<s.length();i++){
             char ch = s.charAt(i);
             if(ch != '*') st.push(ch);
-            else if(i != 0 && ch == '*') {
+            else if(!st.isEmpty()   && ch == '*') {
                 st.pop();
             }
         }
