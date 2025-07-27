@@ -1,20 +1,15 @@
 class Solution {
-    public int binarySearch(int target, int[] arr){
-        int low = 0;
-        int high = arr.length-1;
-        while(low <= high){
-            int mid = low + (high - low) / 2;
-            if(arr[mid] == target) return target;
-            else if(target < arr[mid]) high = mid-1;
-            else low = mid+1;
+    public int getCommon(int[] arr1, int[] arr2) {
+        int len1 = arr1.length;
+        int len2 = arr2.length;
+        int i = 0;
+        int j = 0;
+        while(i < len1 && j < len2){
+            if(arr1[i] == arr2[j]) return arr1[i];
+            else if(arr1[i] < arr2[j]) i++;
+            else j++;
         }
-        return Integer.MAX_VALUE;
-    }
-    public int getCommon(int[] nums1, int[] nums2) {
-        int ans = Integer.MAX_VALUE;
-        for(int i=0;i<nums1.length;i++){
-            ans =  Math.min(binarySearch(nums1[i], nums2), ans);
-        }
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return -1;
+
     }
 }
