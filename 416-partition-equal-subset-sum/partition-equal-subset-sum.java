@@ -1,20 +1,20 @@
 class Solution {
-    public boolean solve(int idx, int sum, int target, int[] arr, Boolean[][] dp){
-        if(sum == target) return true;
-        if(idx >= arr.length || sum > target) return false;
-        if(dp[idx][sum] != null) return dp[idx][sum];
-        boolean take = solve(idx+1, sum+arr[idx], target, arr, dp);
-        boolean notTake = solve(idx+1, sum, target, arr, dp);
-        return dp[idx][sum] = take || notTake;
+    public boolean solve(int idx, int[] arr, int target, Boolean[][] dp){
+        if(idx == arr.length){
+            if(target == 0) return true;
+            else return false;
+        }
+        if(target < 0) return false;
+        if(dp[idx][target] != null) return dp[idx][target];
+        boolean notPick = solve(idx+1, arr, target, dp);
+        boolean pick = solve(idx+1, arr, target-arr[idx], dp);
+        return dp[idx][target] = pick || notPick;
     }
     public boolean canPartition(int[] arr) {
-        int totalSum = 0;
-        for(int i=0;i<arr.length;i++){
-            totalSum += arr[i];
-        }
-        if(totalSum % 2 != 0) return false;
-        int target = totalSum/2;
-        Boolean[][] dp = new Boolean[arr.length][target+1];
-        return solve(0, 0, target, arr, dp);
+        int sum = 0;
+        for(int ele : arr) sum += ele;
+        if(sum % 2 != 0) return false;
+        Boolean[][] dp = new Boolean[arr.length+1][(sum/2) + 1];
+        return solve(0, arr, sum/2, dp);
     }
 }
