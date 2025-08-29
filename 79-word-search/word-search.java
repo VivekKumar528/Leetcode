@@ -5,7 +5,7 @@ class Solution {
         int n = board[0].length;
         if(idx == word.length()) return true;
 
-        if(i < 0 || j < 0 || i >= m || j >= n || board[i][j] == '$') return false;
+        if(i < 0 || j < 0 || i >= m || j >= n) return false;
         if(board[i][j] != word.charAt(idx)) return false;
 
         char temp = board[i][j];
