@@ -5,5 +5,6 @@ class Solution {
             if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') return true;
         }
         return false;
+        // I don't how this is working
     }
 }
