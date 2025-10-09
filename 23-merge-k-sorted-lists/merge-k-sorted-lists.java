@@ -10,23 +10,16 @@
  */
 class Solution {
     public ListNode mergeTwoSortedLists(ListNode l1, ListNode l2){
-        ListNode mergedList = new ListNode(-1);
-        ListNode temp = mergedList;
-        ListNode first = l1;
-        ListNode second = l2;
-        while(first != null && second != null){
-            if(first.val < second.val){
-                temp.next = first;
-                first = first.next;
-            } else {
-                temp.next = second;
-                second = second.next;
-            }
-            temp = temp.next;
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+
+        if(l1.val <= l2.val){
+            l1.next = mergeTwoSortedLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoSortedLists(l1, l2.next);
+            return l2;
         }
-        if(first != null) temp.next = first;
-        if(second != null) temp.next = second;
-        return mergedList.next;
     }
 
     public ListNode partitionAndMerge(int start, int end, ListNode[] lists){
