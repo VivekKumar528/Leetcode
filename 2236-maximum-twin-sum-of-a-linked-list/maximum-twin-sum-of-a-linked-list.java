@@ -1,16 +1,22 @@
 class Solution {
     public int pairSum(ListNode head) {
-        ArrayList<Integer> list = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
         ListNode temp = head;
+
         while(temp != null){
-            list.add(temp.val);
+            st.push(temp.val);
             temp = temp.next;
         }
+        int i = 0;
+        temp = head;
         int max = Integer.MIN_VALUE;
-        for(int i=0;i<list.size();i++){
-            int val1 = list.get(i);
-            int val2 = list.get(list.size()-1-i);
+        int size = st.size();
+        while(i < (size/2)){
+            int val1 = temp.val;
+            int val2 = st.pop();
             max = Math.max(Math.abs(val1+val2), max);
+            i++;
+            temp = temp.next;
         }
         return max;
     }
