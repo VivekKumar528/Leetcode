@@ -1,22 +1,19 @@
 class Solution {
+    public int countNodes(TreeNode root){
+        if(root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+    public boolean dfs(TreeNode root, int idx, int totalNodes){
+        if(root == null) return true;
+
+        if(idx > totalNodes) return false;
+
+        return dfs(root.left, 2*idx, totalNodes) && dfs(root.right, (2*idx + 1), totalNodes);
+    }
     public boolean isCompleteTree(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        boolean seenNull = false;
-        while (!q.isEmpty()) {
-            TreeNode front = q.poll();
-            if (front == null) {
-                seenNull = true;
-            } else {
-                if (seenNull == true)
-                    return false;
+        int totalNodes = countNodes(root);
 
-                q.offer(front.left);
-
-                q.offer(front.right);
-            }
-
-        }
-        return true;
+        int i = 1;
+        return dfs(root, i, totalNodes);
     }
 }
