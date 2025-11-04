@@ -1,22 +1,12 @@
 class Solution {
-    public boolean isOnePresent(TreeNode node){
-        if(node == null) return false;
-
-        if(node.val == 1) return true;
-
-        return isOnePresent(node.left) || isOnePresent(node.right);
-    }
+    
     public TreeNode pruneTree(TreeNode root) {
-        if(root == null) return null;
+       if(root == null) return null;
+       root.left = pruneTree(root.left);
+       root.right = pruneTree(root.right);
 
-        if(!isOnePresent(root.left)) root.left = null;
-        if(!isOnePresent(root.right)) root.right = null;
+       if(root.left == null && root.right == null && root.val == 0) return null;
 
-        pruneTree(root.left);
-        pruneTree(root.right);
-
-        if(root.left == null && root.right == null && root.val == 0) return null;
-
-        return root;
+       return root;
     }
 }
