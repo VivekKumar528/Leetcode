@@ -1,13 +1,12 @@
 class Solution {
-    public boolean check(String str, char start, char end){
-        for(char ch : str.toCharArray()){
-            if(ch < start || ch > end) return false;
-        }
-        return true;
-    }
     public boolean detectCapitalUse(String word) {
-        if(check(word, 'A', 'Z') || check(word, 'a', 'z') || check(word.substring(1), 'a', 'z')) return true;
+        int countCapital = 0;
+        for(char ch : word.toCharArray()){
+            if(ch >= 'A' && ch <= 'Z') countCapital++;
+        }
+        int len = word.length();
+        if(countCapital == len || countCapital == 0 || (countCapital == 1 && Character.isUpperCase(word.charAt(0)))) return true;
+
         return false;
     }
-
 }
