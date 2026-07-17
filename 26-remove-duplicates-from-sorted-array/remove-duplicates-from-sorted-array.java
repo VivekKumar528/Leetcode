@@ -9,12 +9,11 @@ class Solution {
         int j = 1;
         int len = nums.length;
         while(j < len){
-            if(nums[i] == nums[j]){
-                j++;
-            } else {
+            if(nums[i] != nums[j]){
                 i++;
                 nums[i] = nums[j];
             }
+            j++;
         } 
         return i+1;
     }
