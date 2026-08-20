@@ -28,7 +28,7 @@ class Solution {
         // ans.clear();
         Arrays.sort(nums);
 
-        for(int i=0;i<len;i++){
+        for(int i=0;i<=len-3;i++){
             if(i > 0 && nums[i] == nums[i-1]) continue;
             int n1 = nums[i];
             int target = -n1;
