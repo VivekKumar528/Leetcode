@@ -2,7 +2,7 @@ class Solution {
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int len = nums.length;
-        int closestSum = 100000;
+        int closestSum = nums[0] + nums[1] + nums[2];
         for(int x=0;x<=len-1;x++){
             int i = x+1;
             int j = len-1;
