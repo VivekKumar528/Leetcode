@@ -20,7 +20,7 @@ class Solution {
         int[] result = new int[m*n];
         int idx = 0;
         int count = 1;
-        for(int key = 0; key < m + n - 1; key++){
+        for(int key : map.keySet()){
             List<Integer> val = map.get(key);
             if(key % 2 == 0) Collections.reverse(val);
             for(int ele : val){
