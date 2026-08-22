@@ -17,10 +17,13 @@ class Solution {
                 }
             }
         }
+        for(List<Integer> val : map.values()){
+            Collections.sort(val);
+        }
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 List<Integer> key = map.get(i - j);
-                Collections.sort(key);
+                
                 mat[i][j] = key.get(0);
                 key.remove(0);
             }
