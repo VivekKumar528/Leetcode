@@ -20,12 +20,12 @@ class Solution {
         for(List<Integer> val : map.values()){
             Collections.sort(val);
         }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
+        for(int i=m-1;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
                 List<Integer> key = map.get(i - j);
-                
-                mat[i][j] = key.get(0);
-                key.remove(0);
+                int size = key.size();
+                mat[i][j] = key.get(size-1);
+                key.remove(size-1);
             }
         }
         return mat;
