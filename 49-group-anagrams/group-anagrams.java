@@ -1,19 +1,38 @@
 class Solution {
+    public String generateWordFromFreq(String str){
+        int[] freq = new int[26];
+        for(char ch : str.toCharArray()){
+            freq[ch - 'a']++;
+        }
+        StringBuilder newWord = new StringBuilder();
+
+        for(int i=0;i<26;i++){
+            int f = freq[i];
+            if(f > 0){
+                char letter = (char) (i + 'a');
+                for(int j =0;j<f;j++){
+                    newWord.append(letter);
+                }
+            }
+        }
+        return newWord.toString();
+
+        
+    }
     public List<List<String>> groupAnagrams(String[] strs) {
-        int len = strs.length;
+        int size = strs.length;
+
         HashMap<String, List<String>> map = new HashMap<>();
-        for(int i=0;i<len;i++){
-            String str = strs[i];
-            char[] chars = str.toCharArray();
-            Arrays.sort(chars);
-            String sorted = new String(chars);
-            if(map.containsKey(sorted)){
-                List<String> val = map.get(sorted);
-                val.add(str);
+
+        for(int i=0;i<size;i++){
+            String word = strs[i];
+            String newWord = generateWordFromFreq(word);
+            if(map.containsKey(newWord)){
+                map.get(newWord).add(word);
             } else {
                 List<String> temp = new ArrayList<>();
-                temp.add(str);
-                map.put(sorted, temp);
+                temp.add(word);
+                map.put(newWord, temp);
             }
         }
         List<List<String>> res = new ArrayList<>();
@@ -22,6 +41,5 @@ class Solution {
             res.add(val);
         }
         return res;
-
     }
 }
