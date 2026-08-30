@@ -1,21 +1,13 @@
 class Solution {
+    void preOrder(TreeNode root, int level, List<Integer> result){
+        if(root == null) return;
+        if(result.size() < level) result.add(root.val);
+        preOrder(root.right, level+1, result);
+        preOrder(root.left, level+1, result);
+    }
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        if(root == null) return result;
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-
-        while(q.size() != 0){
-            int n = q.size();
-
-            TreeNode node = null;
-            while(n --> 0){
-                node = q.poll();
-                if(node.left != null) q.offer(node.left);
-                if(node.right != null) q.offer(node.right);
-            }
-            result.add(node.val);
-        }
+        preOrder(root, 1, result);
         return result;
     }
 }
