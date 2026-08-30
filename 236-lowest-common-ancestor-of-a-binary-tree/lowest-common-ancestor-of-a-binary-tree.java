@@ -4,12 +4,14 @@ class Solution {
 
         if(root == p || root == q) return root;
 
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        TreeNode leftN  = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightN = lowestCommonAncestor(root.right, p, q);
 
-        if(left != null && right != null) return root;
+        if(leftN != null && rightN != null) return root;
 
-        if(left != null) return left;
-        return right;
+        if(leftN != null) return leftN;
+
+        return rightN;
+
     }
 }
