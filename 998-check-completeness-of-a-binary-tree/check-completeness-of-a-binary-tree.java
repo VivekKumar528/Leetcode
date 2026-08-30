@@ -1,22 +1,16 @@
 class Solution {
+    public int countNodes(TreeNode root){
+        if(root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+    public boolean traversal(TreeNode root, int i, int totalNodes){
+        if(root == null) return true;
+        if(i > totalNodes) return false;
+        return traversal(root.left, 2*i, totalNodes) && traversal(root.right, 2*i+1, totalNodes);
+    }
     public boolean isCompleteTree(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        boolean seenNullNode = false;
-        while (!q.isEmpty()) {
-            TreeNode node = q.poll();
-
-            if (node == null) {
-                seenNullNode = true;
-            } else {
-                if (seenNullNode == true)
-                    return false;
-
-                q.offer(node.left);
-                q.offer(node.right);
-            }
-
-        }
-        return true;
+        int totalNodes = countNodes(root);
+        int i = 1;
+        return traversal(root, i, totalNodes);
     }
 }
