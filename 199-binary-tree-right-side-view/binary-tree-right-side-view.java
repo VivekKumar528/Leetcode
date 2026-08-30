@@ -1,13 +1,21 @@
 class Solution {
-    public void helper(TreeNode root, int level, List<Integer> ans){
-        if(root == null) return;
-        if(ans.size() < level) ans.add(root.val);
-        if(root.right != null) helper(root.right, level+1, ans);
-        if(root.left != null) helper(root.left, level+1, ans);
-    }
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> ans = new ArrayList<>();
-        helper(root, 1, ans);
-        return ans;
+        List<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while(q.size() != 0){
+            int n = q.size();
+
+            TreeNode node = null;
+            while(n --> 0){
+                node = q.poll();
+                if(node.left != null) q.offer(node.left);
+                if(node.right != null) q.offer(node.right);
+            }
+            result.add(node.val);
+        }
+        return result;
     }
 }
