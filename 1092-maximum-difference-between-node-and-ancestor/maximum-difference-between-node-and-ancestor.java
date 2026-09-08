@@ -1,26 +1,17 @@
-
 class Solution {
-    int maxDiff = Integer.MIN_VALUE;
-    void findMaxDiff(TreeNode root, TreeNode child){
-        if(root == null || child == null) return;
-        maxDiff = Math.max(maxDiff, Math.abs(root.val - child.val));
+    int diff = 0;
 
-        findMaxDiff(root, child.left);
-        findMaxDiff(root, child.right);
+    void traversal(TreeNode root, int min, int max) {
+        if (root == null)
+            return;
+        diff = Math.max(diff, Math.max(Math.abs(root.val - min), Math.abs(root.val - max)));
+
+        traversal(root.left, Math.min(root.val, min), Math.max(root.val, max));
+        traversal(root.right, Math.min(root.val, min), Math.max (root.val, max));
     }
 
-    void treeIterator(TreeNode root){
-        if(root == null) return;
-
-        findMaxDiff(root, root.left);
-        findMaxDiff(root, root.right);
-
-        treeIterator(root.left);
-        treeIterator(root.right);
-    }
     public int maxAncestorDiff(TreeNode root) {
-        treeIterator(root);
-
-        return maxDiff;
+        traversal(root, root.val, root.val);
+        return diff;
     }
 }
