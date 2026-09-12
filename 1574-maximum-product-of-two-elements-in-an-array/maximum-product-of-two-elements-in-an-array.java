@@ -1,13 +1,7 @@
 class Solution {
-    public int maxProduct(int[] arr) {
-        int firstMax = Integer.MIN_VALUE;
-        int secondMax = Integer.MIN_VALUE;
-        for(int i=0;i<arr.length;i++){
-            if(arr[i] > firstMax){
-                    secondMax = firstMax;
-                    firstMax = arr[i];
-                } else if(arr[i] > secondMax) secondMax = arr[i];
-        }
-        return (firstMax-1) * (secondMax-1);
+    public int maxProduct(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        return (nums[len-1]-1) * (nums[len-2]-1);
     }
 }
