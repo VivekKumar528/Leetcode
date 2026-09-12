@@ -1,8 +1,17 @@
 class Solution {
-    public String largestOddNumber(String str) {
-        int len = str.length();
+    public String largestOddNumber(String num) {
+        // int len = num.length();
+        // for(int i=len-1;i>=0;i--){
+        //     char ch = num.charAt(i);
+        //     int n = ch - '0';
+        //     if(n % 2 == 1) return num.substring(0, i+1);
+        // }
+        // return "";
+        int len = num.length();
         for(int i=len-1;i>=0;i--){
-            if((str.charAt(i) - '0') % 2 != 0 ) return str.substring(0, i+1);
+            char ch = num.charAt(i);
+            int n = ch - '0';
+            if(n % 2 == 1) return num.substring(0, i+1);
         }
         return "";
     }
