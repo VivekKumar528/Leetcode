@@ -1,22 +1,27 @@
 class Solution {
-    public int numSpecial(int[][] mat) {
-        int[] row = new int[mat.length];
-        int[] col = new int[mat[0].length];
-        int ans = 0;
-        for(int i=0;i<mat.length;i++){
-            for(int j=0;j<mat[0].length;j++){
-                if(mat[i][j] == 1){
-                    row[i] += 1;
-                    col[j] += 1;
-                }
+    boolean check(int[][] arr, int row, int col){
+        int count = 0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i][col] == 1) count++;
+            if(count >= 2) return false;
+        }
+        count = 0;
+        for(int j=0;j<arr[0].length;j++){
+            if(arr[row][j] == 1) count++;
+            if(count >= 2) return false;
+        }
+        return true;
+    }
+    public int numSpecial(int[][] arr) {
+        int m = arr.length;
+        int n = arr[0].length;
+        int res = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(arr[i][j] == 1 && check(arr, i, j)) res++;
             }
         }
-        for(int i=0;i<mat.length;i++){
-            for(int j=0;j<mat[0].length;j++){
-                if(mat[i][j] == 1 && row[i] == 1 && col[j] == 1) ans++;
-            }
-        }
-        return ans;
-        
+
+        return res;
     }
 }
