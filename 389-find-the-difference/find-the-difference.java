@@ -1,15 +1,29 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        int sumS = 0;
-        int sumT = 0;
-        for(int i=0;i<s.length();i++){
-            char ch = s.charAt(i);
-            sumS += (int)ch;
+        // HashMap<Character, Integer> map = new HashMap<>();
+        // for(char ch : s.toCharArray()){
+        //     if( map.containsKey(ch)){
+        //         int val = map.get(ch);
+        //         map.put(ch, val+1);
+        //     } else map.put(ch, 1);
+        // }
+        // for(char ch : t.toCharArray()){
+        //     if(!map.containsKey(ch)) return ch;
+        //     else {
+        //         int val = map.get(ch);
+        //         map.put(ch, val-1);
+        //     }
+        // }
+        // return 'a';
+
+        int sAsciiSum = 0;
+        for(char ch : s.toCharArray()){
+            sAsciiSum += (int)ch;
         }
-        for(int i=0;i<t.length();i++){
-            char ch = t.charAt(i);
-            sumT += (int)ch;
+        int tAsciiSum = 0;
+        for(char ch : t.toCharArray()){
+            tAsciiSum += (int)ch;
         }
-        return (char)Math.abs(sumS - sumT);
+        return  (char)Math.abs(sAsciiSum - tAsciiSum);
     }
 }
