@@ -1,31 +1,35 @@
 class Solution {
-    public int binarySearch(int left, int right, int[] arr, int target){
-        while(left <= right){
-            int mid = left + (right - left)/2;
-            if(arr[mid] == target ) return mid;
-            if(target > arr[mid]) left = mid+1;
-            else right = mid-1;
+    public int findPivot(int[] arr){
+        int l = 0;
+        int r = arr.length-1;
+
+        while(l < r){
+            int mid = l + (r-l)/2;
+            if(arr[mid] > arr[r]) l = mid+1;
+            else r = mid;
+        }
+        return r;
+    }
+    public int binarySearch(int[] arr, int l, int r, int target){
+        while(l <= r){
+            int mid = l + (r-l)/2;
+            if(arr[mid] < target) l = mid+1;
+            else if(arr[mid] > target) r = mid-1;
+            else return mid;
         }
         return -1;
     }
-    public int search(int[] arr, int target) {
-        int len = arr.length;
-        if(len <= 10){
-            for(int x=0;x<len;x++){
-                if(arr[x] == target) return x;
-            }
-        }
-        int pivot = -1;
-        for(int x=1;x<len-1;x++){
-            if(arr[x-1] < arr[x] && arr[x] > arr[x+1]) {
-                pivot = x;
-                break;
-            }
-        }
-        int ans1 = binarySearch(0, pivot, arr, target);
-        int ans2 = binarySearch(pivot+1, len-1, arr, target);
-        if(ans1 != -1) return ans1;
-        if(ans2 != -1) return ans2;
-        return -1;
+    public int search(int[] nums, int target) {
+        int len = nums.length;
+
+        int pivotIdx = findPivot(nums);
+
+        int idx = binarySearch(nums, 0, pivotIdx-1, target);
+        if(idx != -1) return idx;
+
+        idx = binarySearch(nums, pivotIdx, len-1, target);
+
+        return idx;
+
     }
 }
