@@ -1,23 +1,25 @@
-class Pair {
-    int first;
-    int second;
-    Pair(int first, int second){
-        this.first = first;
-        this.second = second;
-    }
-}
-
 class StockSpanner {
-    Stack<Pair> st = new Stack<>();
-    public StockSpanner() {
-        
+    class Pair {
+        int p;
+        int span;
+
+        Pair(int price, int span) {
+            p = price;
+            this.span = span;
+        }
     }
-    
+
+    public StockSpanner() {
+
+    }
+
+    Stack<Pair> st = new Stack<>();
+
     public int next(int price) {
         int span = 1;
-        while(!st.isEmpty() && st.peek().first <= price){
-            span = span + st.peek().second;
-            st.pop();
+
+        while (!st.isEmpty() && st.peek().p <= price) {
+            span += st.pop().span;
         }
         st.push(new Pair(price, span));
         return span;
