@@ -1,1 +1,1 @@
-<h2>removing-stars-from-a-string Notes</h2><hr>[ Time taken: 7m 18s ]
+<h2>removing-stars-from-a-string Notes</h2><hr>[ Time taken: 9hrs 4m 47s ]
