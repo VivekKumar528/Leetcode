@@ -13,8 +13,8 @@ class Solution {
         for(int i=0;i<len;i++){
             int sand = sandwiches[i];
 
-            if(sand == 0 && countZero == 0) return len-i;
-            if(sand == 1 && countOne == 0) return len - i;
+            if(sand == 0 && countZero == 0) return countOne;
+            if(sand == 1 && countOne == 0) return countZero;
 
             if(sand == 0) countZero--;
             else countOne--;
