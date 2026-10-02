@@ -1,34 +1,28 @@
 class Solution {
-    public boolean isValid(StringBuilder sb){
-        int res = 0;
-        for(char ch : sb.toString().toCharArray()){
-            if(ch == '(') res++;
-            else {
-                res--;
-                if(res < 0) return false;
-            }
-        }
-
-        return res == 0;
-    }
-    public void solve(StringBuilder curr, List<String> res, int n){
-        if(curr.length() == 2*n){
-            if(isValid(curr)) res.add(curr.toString());
+    public void solve(StringBuilder curr, List<String> res, int n, int open, int close) {
+        if (curr.length() == 2 * n) {
+            res.add(curr.toString());
             return;
         }
 
-        curr.append("(");
-        solve(curr, res, n);
-        curr.deleteCharAt(curr.length()-1);
-        curr.append(")");
-        solve(curr, res, n);
-        curr.deleteCharAt(curr.length()-1);
-
+        if (open < n) {
+            curr.append("(");
+            solve(curr, res, n, open+1, close);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+        if (close < open) {
+            curr.append(")");
+            solve(curr, res, n, open, close+1);
+            curr.deleteCharAt(curr.length() - 1);
+        }
 
     }
+
     public List<String> generateParenthesis(int n) {
-        List<String> res= new ArrayList<>();
-        solve(new StringBuilder(), res, n);
+        List<String> res = new ArrayList<>();
+        int open = 0;
+        int close = 0;
+        solve(new StringBuilder(), res, n, open, close);
         return res;
 
     }
