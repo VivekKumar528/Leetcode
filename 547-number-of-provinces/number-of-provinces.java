@@ -1,54 +1,30 @@
 class Solution {
-    public void BFS(Map<Integer, List<Integer>> map, int u, boolean[] vis){
-        vis[u] = true;
+    public void bfs(int start, int[][] adj, boolean[] vis){
         Queue<Integer> q = new LinkedList<>();
-        q.offer(u);
+        q.add(start);
+        vis[start] = true;
+
         while(q.size() > 0){
-            int n = q.size();
-            for(int i=0;i<n;i++){
-                int ele = q.poll();
-                for(int e : map.get(ele)){
-                    if(!vis[e]) {
-                        q.offer(e);
-                        vis[e] = true;
-                    }
-                }
+            int front = q.remove();
+            for(int j=0;j<adj.length;j++){
+                if(adj[front][j] == 1 && !vis[j]){
+                    q.add(j);
+                    vis[j] = true;
+                }                
             }
         }
+
     }
-    public void DFS(Map<Integer, List<Integer>> map, int u, boolean[] vis){
-        vis[u] = true;
-        for(int v : map.get(u)){
-            if(!vis[v]){
-                DFS(map,v,vis);
-            }
-        }
-    }
-    public int findCircleNum(int[][] isConnected) {
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
-        int n = isConnected.length;
-        int m = isConnected[0].length;
-        for(int i=1;i<=n;i++) map.put(i, new ArrayList<>());
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(i != j && isConnected[i][j] == 1){
-                    map.get(i+1).add(j+1);
-                }
-            }
-        }
-        boolean[] vis = new boolean[n+1];
+    public int findCircleNum(int[][] adj) {
+        int len = adj[0].length;
+        boolean[] vis = new boolean[len];
         int count = 0;
-        for(int i=1;i<=n;i++){
+        for(int i=0;i<len;i++){
             if(!vis[i]) {
-                // DFS(map, i, vis);
-                BFS(map, i, vis);
+                bfs(i, adj, vis);
                 count++;
-                
             }
         }
-
-        System.out.println(map);
         return count;
-
     }
 }
