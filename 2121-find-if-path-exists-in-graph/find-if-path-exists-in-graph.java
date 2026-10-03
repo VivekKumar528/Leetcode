@@ -1,5 +1,5 @@
 class Solution {
-    public void bfs(int start, List<List<Integer>> adj, boolean[] vis) {
+    public void bfs(int start, int end, List<List<Integer>> adj, boolean[] vis) {
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
         vis[start] = true;
@@ -10,6 +10,7 @@ class Solution {
                 if (!vis[ele]) {
                     q.add(ele);
                     vis[ele] = true;
+                    if(ele == end) return;
                 }
             }
 
@@ -31,7 +32,7 @@ class Solution {
             adj.get(second).add(first);
         }
         boolean[] vis = new boolean[n];
-        bfs(start, adj, vis);
+        bfs(start, end, adj, vis);
         return vis[end];
     }
 }
