@@ -1,1 +1,1 @@
-<h2>keys-and-rooms Notes</h2><hr>[ Time taken: 42m 30s ]
+<h2>keys-and-rooms Notes</h2><hr>[ Time taken: 7m 10s ]
