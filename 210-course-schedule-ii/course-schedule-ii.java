@@ -28,7 +28,7 @@ class Solution {
         if(res.size() != n) return new int[]{};
         int[] ans = new int[res.size()];
         int idx = 0;
-        for(int ele : res) ans[idx] = res.get(idx++);
+        for(int ele : res) ans[idx++] = ele;
         return ans;
 
     }
