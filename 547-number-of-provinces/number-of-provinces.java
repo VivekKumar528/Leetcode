@@ -1,9 +1,9 @@
 class Solution {
-    public void dfs(int i, boolean[] vis, List<List<Integer>> adj){
+    public void dfs(int i, boolean[] vis, int[][] mat){
         vis[i] = true;
-
-        for(int ele : adj.get(i)){
-            if(!vis[ele]) dfs(ele, vis, adj);
+        int n = mat.length;
+        for(int col=0;col<n;col++){
+            if(mat[i][col] == 1 && !vis[col]) dfs(col, vis, mat);
         }
     }
     // public void bfs(int i, boolean[] vis, List<List<Integer>> adj){
@@ -24,25 +24,13 @@ class Solution {
     public int findCircleNum(int[][] mat) {
         int n = mat.length;
 
-        List<List<Integer>> adj = new ArrayList<>();
-        for(int i=0;i<n;i++) adj.add(new ArrayList<>());
-
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(mat[i][j] == 1){
-                    adj.get(i).add(j);
-                    adj.get(j).add(i);
-                }
-            }
-        }
-
         boolean[] vis = new boolean[n];
         int count = 0;
 
         for(int i=0;i<n;i++){
             if(!vis[i]) {
                 // bfs(i, vis, adj);
-                dfs(i, vis, adj);
+                dfs(i, vis, mat);
                 count++;
             }
         }
