@@ -1,35 +1,38 @@
 class Solution {
     public int[] findOrder(int n, int[][] pre) {
-        List<List<Integer>> adj = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for(int i=0;i<n;i++) adj.add(new ArrayList<>());
-
         int[] indegree = new int[n];
         for(int i=0;i<pre.length;i++){
-            int first = pre[i][1];
-            int second = pre[i][0];
-
-            adj.get(first).add(second);
-            indegree[second]++;
+            int first = pre[i][0];
+            int second = pre[i][1];
+            adj.get(second).add(first);
+            indegree[first]++;
         }
-        List<Integer> res = new ArrayList<>();
+        ArrayList<Integer> temp = new ArrayList<>();
         Queue<Integer> q = new LinkedList<>();
-        for(int i=0;i<n;i++){
-            if (indegree[i] == 0) q.add(i);
+        int count = 0;
+        for(int i=0;i<indegree.length;i++) if(indegree[i] == 0) {
+            q.add(i);
+            temp.add(i);
+            count++;
         }
+
         while(q.size() > 0){
             int front = q.remove();
-            res.add(front);
             for(int ele : adj.get(front)){
                 indegree[ele]--;
-                if(indegree[ele] == 0) q.add(ele);
+                if(indegree[ele] == 0) {
+                    q.add(ele);
+                    temp.add(ele);
+                    count++;
+                }
             }
         }
-
-        if(res.size() != n) return new int[]{};
-        int[] ans = new int[res.size()];
+        int[] ans = new int[n];
         int idx = 0;
-        for(int ele : res) ans[idx++] = ele;
-        return ans;
-
+        for(int ele : temp) ans[idx++] = ele;
+        if(count == n) return ans;
+        return new int[]{};
     }
 }
