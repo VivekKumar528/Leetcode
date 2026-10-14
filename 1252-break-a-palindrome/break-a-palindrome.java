@@ -1,16 +1,16 @@
 class Solution {
     public String breakPalindrome(String palindrome) {
-        int len = palindrome.length();
-        if(len == 0 || len == 1) return "";
-
-        char[] x = palindrome.toCharArray();
-        for(int i=0;i<len/2;i++){
-            if(x[i] != 'a'){
-                x[i] = 'a';
-                return new String(x);
+        int n = palindrome.length();
+        if(n == 0 || n == 1) return "";
+        char[] arr = palindrome.toCharArray();
+        for(int i=0;i<n/2;i++){
+            if(arr[i] != 'a'){
+                arr[i] = 'a';
+                return new String(arr);
             }
         }
-        x[len - 1] = 'b';
-        return new String(x);
+        arr[n-1] = 'b';
+        return new String(arr);
     }
 }
+
