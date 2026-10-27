@@ -10,11 +10,11 @@ class Solution {
         }
         String[] ans = new String[m];
         for(int i=0;i<m;i++){
-            String res = new String();
+            StringBuilder res = new StringBuilder();
             for(int j=0;j<n;j++){
-                res += temp[i][j];
+                res.append(temp[i][j]);
             }
-            ans[i] = res;
+            ans[i] = res.toString();
         }
 
         return ans;
